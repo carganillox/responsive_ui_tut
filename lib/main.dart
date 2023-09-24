@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tutresponsive/ui/splash/splash_scree.dart';
 
-import 'main_page.dart';
 import 'provider/theme_provider.dart';
 
 void main() {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const HomePage(),
+          home: const SplashScreen(),
           darkTheme: value.isDarkTheme ? ThemeData.dark() : ThemeData.light(),
           themeMode: value.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
         );

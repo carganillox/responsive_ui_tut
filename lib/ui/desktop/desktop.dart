@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tutresponsive/provider/theme_provider.dart';
 
-import '../data_class/temp_class.dart';
+import '../../data_class/temp_class.dart';
 
 class DesktopPage extends StatefulWidget {
   String platform;
@@ -18,8 +18,15 @@ class _DesktopPageState extends State<DesktopPage> {
   Widget build(BuildContext context) {
     bool isPortrait = widget.isPortrait;
     String platform = widget.platform;
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.sizeOf(context).height;
+
+    str.clear;
+    int targetCount = 200;
+    for (var i = 0; i <= targetCount; i++) {
+      String stri = 'Item';
+      if (stri.length < 100) {
+        str.add(stri + i.toString());
+      }
+    }
 
     return Consumer<ThemeProvider>(
       builder: (context, value, child) {
@@ -50,8 +57,19 @@ class _DesktopPageState extends State<DesktopPage> {
               Container(
                   width: 300,
                   color: Colors.blue,
-                  child: const Center(
-                    child: Text('Side bar'),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: str.length,
+                          itemBuilder: (context, index) {
+                            return Center(
+                              child: Text(str[index]),
+                            );
+                          },
+                        ),
+                      )
+                    ],
                   )),
               Expanded(
                 child: GridView.count(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../data_class/temp_class.dart';
-import '../provider/theme_provider.dart';
+import '../../data_class/temp_class.dart';
+import '../../provider/theme_provider.dart';
 
 class TabletPage extends StatefulWidget {
   String platform;
