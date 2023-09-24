@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
 import '../../main_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +14,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
 
-    Timer(const Duration(seconds: 3), () {
+    //Set timer 1s for splash screen then navigate to homepage
+    Timer(const Duration(seconds: 1), () {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -29,10 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: const Center(
-          child: Icon(
-        Icons.settings,
-        size: 60,
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+        image: AssetImage('assets/hello.gif'),
       )),
     );
   }

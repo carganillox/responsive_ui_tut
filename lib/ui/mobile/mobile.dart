@@ -5,9 +5,7 @@ import '../../data_class/temp_class.dart';
 import '../../provider/theme_provider.dart';
 
 class MobilePage extends StatefulWidget {
-  String platform;
-  bool isPortrait;
-  MobilePage({super.key, required this.isPortrait, required this.platform});
+  const MobilePage({super.key});
 
   @override
   State<MobilePage> createState() => _MobilePageState();
@@ -16,8 +14,9 @@ class MobilePage extends StatefulWidget {
 class _MobilePageState extends State<MobilePage> {
   @override
   Widget build(BuildContext context) {
-    bool isPortrait = widget.isPortrait;
-    String platform = widget.platform;
+    final platForm = context.select((ThemeProvider p) => p.platform);
+    bool isPortrait = context.select((ThemeProvider p) => p.isPortrait);
+
     final isDarkModePro = context.select((ThemeProvider p) => p.isDarkTheme);
     bool isMobile = MediaQuery.sizeOf(context).shortestSide < 600;
 
@@ -30,7 +29,7 @@ class _MobilePageState extends State<MobilePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Mobile $platform'),
+              Text('Mobile $platForm'),
               Switch.adaptive(
                 value: isDarkModePro,
                 onChanged: (value) {

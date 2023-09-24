@@ -5,9 +5,7 @@ import '../../data_class/temp_class.dart';
 import '../../provider/theme_provider.dart';
 
 class TabletPage extends StatefulWidget {
-  String platform;
-  bool isPortrait;
-  TabletPage({super.key, required this.isPortrait, required this.platform});
+  const TabletPage({super.key});
 
   @override
   State<TabletPage> createState() => _TabletPageState();
@@ -16,8 +14,8 @@ class TabletPage extends StatefulWidget {
 class _TabletPageState extends State<TabletPage> {
   @override
   Widget build(BuildContext context) {
-    bool isPortrait = widget.isPortrait;
-    String platform = widget.platform;
+    final platForm = context.select((ThemeProvider p) => p.platform);
+    bool isPortrait = context.select((ThemeProvider p) => p.isPortrait);
     // bool isMobile = MediaQuery.sizeOf(context).shortestSide < 600;
 
     print('Portrait:$isPortrait');

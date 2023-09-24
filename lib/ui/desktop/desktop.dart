@@ -5,9 +5,7 @@ import 'package:tutresponsive/provider/theme_provider.dart';
 import '../../data_class/temp_class.dart';
 
 class DesktopPage extends StatefulWidget {
-  String platform;
-  bool isPortrait;
-  DesktopPage({super.key, required this.isPortrait, required this.platform});
+  const DesktopPage({super.key});
 
   @override
   State<DesktopPage> createState() => _DesktopPageState();
@@ -16,8 +14,8 @@ class DesktopPage extends StatefulWidget {
 class _DesktopPageState extends State<DesktopPage> {
   @override
   Widget build(BuildContext context) {
-    bool isPortrait = widget.isPortrait;
-    String platform = widget.platform;
+    final platForm = context.select((ThemeProvider p) => p.platform);
+    bool isPortrait = context.select((ThemeProvider p) => p.isPortrait);
 
     str.clear;
     int targetCount = 200;

@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:provider/provider.dart';
+
+import 'provider/theme_provider.dart';
 
 class ResposiveBuilder extends StatelessWidget {
   ResposiveBuilder({
@@ -11,14 +14,20 @@ class ResposiveBuilder extends StatelessWidget {
     required this.desktopBuilder,
   });
 
-  final Widget Function(BuildContext context, BoxConstraints constraints,
-      String platform, bool portrait) mobileBuilder;
+  final Widget Function(
+    BuildContext context,
+    BoxConstraints constraints,
+  ) mobileBuilder;
 
-  final Widget Function(BuildContext context, BoxConstraints constraints,
-      String platform, bool portrait) tabletBuilder;
+  final Widget Function(
+    BuildContext context,
+    BoxConstraints constraints,
+  ) tabletBuilder;
 
-  final Widget Function(BuildContext context, BoxConstraints constraints,
-      String platform, bool portrait) desktopBuilder;
+  final Widget Function(
+    BuildContext context,
+    BoxConstraints constraints,
+  ) desktopBuilder;
 
   bool isMobile(BuildContext context) => MediaQuery.sizeOf(context).width < 600;
   bool isTablet(BuildContext context) =>
@@ -27,17 +36,14 @@ class ResposiveBuilder extends StatelessWidget {
   bool isDesktop(BuildContext context) =>
       MediaQuery.sizeOf(context).width >= 1100;
 
-  bool isDesktopPortrait(BuildContext context) =>
-      MediaQuery.orientationOf(context) == Orientation.portrait;
-  bool isMobilePortrait(BuildContext context) =>
-      MediaQuery.orientationOf(context) == Orientation.portrait;
-  bool isTabletPortrait(BuildContext context) =>
+  bool isPortTrait(BuildContext context) =>
       MediaQuery.orientationOf(context) == Orientation.portrait;
 
   String platform = '';
 
   @override
   Widget build(BuildContext context) {
+    //Identify what platform are you using
     if (kIsWeb) {
       // Web-specific code
       platform = 'web';
@@ -66,15 +72,18 @@ class ResposiveBuilder extends StatelessWidget {
         double screenHeight = MediaQuery.sizeOf(context).height;
         double screenWidth = MediaQuery.sizeOf(context).height;
 
+        //add state for future used
+        context
+            .read<ThemeProvider>()
+            .setPlatForm(platform, isPortTrait(context));
+
+        //Identify which size for desktop, tablet and mobile
         if (constraints.maxWidth >= 1100) {
-          return desktopBuilder(
-              context, constraints, platform, isDesktopPortrait(context));
+          return desktopBuilder(context, constraints);
         } else if (constraints.maxWidth >= 600) {
-          return tabletBuilder(
-              context, constraints, platform, isMobilePortrait(context));
+          return tabletBuilder(context, constraints);
         } else {
-          return mobileBuilder(
-              context, constraints, platform, isMobilePortrait(context));
+          return mobileBuilder(context, constraints);
         }
       },
     );

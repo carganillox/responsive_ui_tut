@@ -15,23 +15,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return ResposiveBuilder(
-      desktopBuilder: (context, constraints, platform, portrait) {
-        return DesktopPage(
-          isPortrait: portrait,
-          platform: platform,
-        );
+      desktopBuilder: (context, constraints) {
+        return const DesktopPage();
       },
-      tabletBuilder: (context, constraints, platform, portrait) {
-        return TabletPage(
-          isPortrait: portrait,
-          platform: platform,
-        );
+      tabletBuilder: (context, constraints) {
+        return const TabletPage();
       },
-      mobileBuilder: (context, constraints, platform, portrait) {
-        return MobilePage(
-          isPortrait: portrait,
-          platform: platform,
-        );
+      mobileBuilder: (context, constraints) {
+        return const MobilePage();
       },
     );
   }
